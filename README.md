@@ -1,74 +1,90 @@
-🌱 Ciclo Verde: Balança Inteligente com EcoCoins
-O Ciclo Verde é uma solução tecnológica voltada para a sustentabilidade urbana. O projeto utiliza sistemas embarcados para incentivar a destinação correta de resíduos orgânicos em feiras e mercados, transformando descarte em benefício através da moeda social EcoCoins.
+# 🌱 Projeto Ciclo Verde — Balança Inteligente com EcoCoins
 
-🎯 Objetivos do Projeto
-Incentivo Sustentável: Promover a economia circular em ambientes comerciais.
+## 📌 Descrição do Projeto
 
-Redução de Impacto: Diminuir o descarte incorreto de resíduos orgânicos.
+O **Projeto Ciclo Verde** tem como objetivo incentivar a destinação correta de resíduos orgânicos em feiras e mercados por meio de um sistema de recompensas chamado **EcoCoins**.
 
-Gamificação Ambiental: Converter peso de resíduos em EcoCoins, uma moeda de troca para benefícios futuros.
+A solução consiste em uma **balança inteligente**, capaz de:
 
-Arquitetura Modular: Sistema funcional e extensível para diferentes hardwares.
+- Medir o peso de resíduos orgânicos doados;
+- Converter esse peso em EcoCoins;
+- Enviar essas informações para um sistema externo de controle.
 
-⚙️ Funcionamento do Sistema
-O fluxo de operação foi desenhado para ser simples e eficiente:
+Cada quilograma de resíduo doado gera uma quantidade proporcional de EcoCoins, que podem ser utilizados em ações futuras definidas pelo projeto (benefícios, descontos, programas ambientais, etc.).
 
-Pesagem: Uma célula de carga realiza a leitura do resíduo orgânico.
+---
 
-Processamento: O sistema converte o peso bruto em valor de EcoCoins via software.
+## 🎯 Objetivo
 
-Comunicação: Os dados (Peso + EcoCoins) são transmitidos via Serial para monitoramento ou sistemas externos.
+- Incentivar práticas sustentáveis;
+- Reduzir o descarte inadequado de resíduos orgânicos;
+- Promover educação ambiental por meio de recompensas;
+- Desenvolver um sistema embarcado funcional e modular.
 
-🏗️ Estrutura de Pastas
-O projeto utiliza uma separação de preocupações (Clean Architecture principles), permitindo testar a lógica sem depender do hardware físico.
+---
 
-Plaintext
+## ⚙️ Funcionamento do Sistema
+
+O funcionamento do sistema ocorre em ciclos simples:
+
+1. O sistema realiza a leitura do peso do resíduo orgânico utilizando uma célula de carga;
+2. O valor obtido é convertido em EcoCoins, com base em uma taxa de conversão definida;
+3. O peso e o valor de EcoCoins gerados são enviados para um sistema externo  
+   (ex.: exibição no console, serial, ou outro meio de comunicação).
+
+Esse fluxo pode ser executado repetidamente sempre que uma nova doação for realizada.
+
+---
+
+## 🧱 Estrutura do Projeto
+
+```text
 src/
-├── core/               # Lógica de negócio e interfaces (Abstração)
+├── core/
 │   ├── FonteDePeso.h
 │   ├── ConversorEcoCoin.h
 │   ├── CanalDeEnvio.h
-│   └── SistemaEcoCoin.h
-├── infra/              # Implementações de drivers e sensores (Hardware)
-│   ├── FonteDePesoHX711.cpp
-│   ├── ConversorEcoCoinSimples.cpp
-│   └── CanalDeEnvioFake.cpp
-└── main.cpp            # Orquestrador do sistema
-🔌 Hardware e Dependências
-Componentes Suportados
-Microcontroladores: ESP32 ou Arduino Uno.
+│   └── SistemaEcoCoin.h / .cpp
+│
+├── infra/
+│   ├── FonteDePesoFake.*
+│   ├── FonteDePesoHX711.*
+│   ├── ConversorEcoCoinSimples.*
+│   └── CanalDeEnvioFake.*
+│
+└── main.cpp
+```
 
-Sensor: Célula de Carga com amplificador HX711.
+---
 
-Comunicação: Serial (padrão) / Preparado para expansão Wi-Fi.
+## 🔌 Hardware Utilizado
 
-Bibliotecas Necessárias
-O gerenciamento é feito via PlatformIO. A principal dependência é:
+1. Placa: ESP32 ou Arduino Uno
+2. Sensor de peso: HX711 + célula de carga
+3. Comunicação: Serial (no estágio atual)
 
-Ini, TOML
-lib_deps =
-  bogde/HX711
-▶️ Como Executar
-Setup: Instale o VS Code com a extensão PlatformIO.
+---
 
-Clonagem:
+## ▶️ Como Executar
 
-Bash
-git clone https://github.com/seu-usuario/ciclo-verde.git
-Configuração: Ajuste os pinos do HX711 no arquivo de configuração ou main.cpp conforme sua montagem.
+1. Abra o projeto no PlatformIO (VS Code);
+2. Conecte a placa (ESP32 ou Arduino);
+3. Verifique os pinos configurados para o HX711;
+4. Compile e envie o código para a placa;
+5.Acompanhe a saída pelo monitor serial (ou console, no modo fake).7
 
-Upload: Conecte sua placa e clique em PlatformIO: Upload.
+---
 
-Simulação: Caso não possua o sensor físico, utilize a classe FonteDePesoFake na main.cpp para validar a lógica.
+## 🧪 Testes Sem Hardware
 
-🚀 Evoluções Futuras
-[ ] Conectividade: Integração com Wi-Fi/HTTP para envio de dados à nuvem.
+O projeto permite execução sem hardware real utilizando implementações simuladas (Fake), o que facilita testes e validação do funcionamento do sistema antes da integração física.
 
-[ ] Dashboard: Interface web para visualização do total de resíduos coletados.
-
-[ ] Identificação: Implementação de leitores RFID para identificar doadores.
-
-[ ] Persistência: Uso de EEPROM ou banco de dados para histórico de EcoCoins.
+---
 
 📚 Considerações Finais
-Este projeto nasceu da união entre tecnologia e consciência ecológica. A arquitetura modular garante que o Ciclo Verde possa crescer de um simples protótipo para uma rede conectada de pontos de coleta.
+
+Este projeto demonstra uma solução prática e funcional para incentivar a sustentabilidade por meio de tecnologia embarcada, permitindo fácil adaptação e expansão conforme novas necessidades do Projeto Ciclo Verde.
+
+
+
+
